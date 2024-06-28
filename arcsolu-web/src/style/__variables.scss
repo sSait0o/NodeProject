@@ -1,0 +1,31 @@
+$primary-color: #ffffff;
+$secondary-color: #ffffff;
+$tertiary-color: #efba40;
+
+$very-small: 320px;
+$small: 600px;
+$medium: 760px;
+$large: 1025px;
+$very-large: 1281px;
+
+@keyframes open {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes close {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+}

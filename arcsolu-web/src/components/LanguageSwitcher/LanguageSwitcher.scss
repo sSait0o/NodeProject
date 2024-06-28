@@ -1,0 +1,13 @@
+.language__item {
+  display: flex;
+  align-items: center;
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  span {
+    font-weight: bold;
+    color: black;
+  }
+}
