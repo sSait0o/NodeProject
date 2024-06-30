@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,8 +6,6 @@ import "./LanguageSwitcher.scss";
 
 const LanguageSwitcher = ({ anchorEl, handleClose }) => {
   const { t, i18n } = useTranslation();
-  // eslint-disable-next-line no-unused-vars
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -46,7 +44,6 @@ const LanguageSwitcher = ({ anchorEl, handleClose }) => {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
-    setCurrentLanguage(lang);
     handleClose();
   };
 
@@ -60,11 +57,17 @@ const LanguageSwitcher = ({ anchorEl, handleClose }) => {
         horizontal: "center",
       }}
       transformOrigin={{
-        vertical: isMobile ? "top" : "bottom",
+        vertical: isMobile ? "bottom" : "top",
         horizontal: "center",
       }}
+      PaperProps={{
+        style: {
+          marginTop: isMobile ? "40px" : "-30px",
+        },
+      }}
+      className="language__menu"
     >
-      {Object.keys(image).map((lang) => (
+      {Object.keys(language).map((lang) => (
         <MenuItem key={lang} onClick={() => changeLanguage(lang)}>
           <span className="language__item">
             <img src={image[lang]} alt={language[lang]} />

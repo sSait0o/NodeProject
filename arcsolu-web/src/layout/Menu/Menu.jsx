@@ -7,11 +7,13 @@ import {
   IconBooking,
   IconMenu,
 } from "../../components/IconSvg";
-import LanguageSwitcher from "../../components/LanguageSwitcher/languageSwitcher";
+import LanguageSwitcher from "../../components/LanguageSwitcher/languageSwitcher"
+import ModalMenu from "../../components/ModalMenu/ModalMenu";
 
 const Menu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -30,6 +32,10 @@ const Menu = () => {
     return () => window.removeEventListener("resize", updateMedia);
   });
 
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div className="menu__container">
       <div className="nav__container_logo">
@@ -42,7 +48,11 @@ const Menu = () => {
       <div>
         <ul className={isMobile ? "nav__items_bottom" : "nav__items"}>
           <li>
-            <Button text="emporter" icon={<IconTake />} className="nav__emporter"/>
+            <Button
+              text="emporter"
+              icon={<IconTake />}
+              className="nav__emporter"
+            />
           </li>
           <li>
             <Button text="livraison" icon={<IconDelivery />} />
@@ -60,6 +70,7 @@ const Menu = () => {
           src="assets/icon/earth-icon.png"
           alt="Menu Burger"
           className="burger__icon"
+          onClick={toggleModal}
         />
       </div>
       <div
@@ -100,6 +111,7 @@ const Menu = () => {
         </div>
       </div>
       <LanguageSwitcher anchorEl={anchorEl} handleClose={handleClose} />
+      <ModalMenu isOpen={isModalOpen} onClose={toggleModal} />
     </div>
   );
 };
