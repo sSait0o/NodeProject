@@ -1,23 +1,6 @@
 {
-  "welcome": "Bonjour React",
-  "change_language": "Changer de langue",
-  "button_translate": "FR",
-  "home": "accueil",
-  "about": "a propos",
-  "review": "avis",
-  "map": "carte",
-  "contact": "contact",
-  "about_title": "Bienvenue chez GRILL'INN",
-  "about_description": "GRILL'INN est un restaurant gastronomique où nous offrons une expérience culinaire délicieuse. Nos chefs sont dédiés à vous apporter les plats les plus raffinés préparés avec les ingrédients les plus frais. Rejoignez-nous pour une expérience culinaire mémorable.",
-  "legal_title": "Légal",
-  "legal_description": "Ceci est la section légale.",
-  "rgpd_title": "RGPD",
-  "rgpd_description": "Ceci est la section RGPD.",
-  "data_protection": "Protection des données",
-  "made_by": "Fait par ARCSOLU",
-  "contact_tel": "Contact",
-  "contact_address": "Adresse",
-  "contact_opening": "Heures d'ouverture",
-  "contact_reservation": "Réservation",
-  "order": "COMMANDER"
+  "takeaway": "emporter",
+  "delivery": "livraison",
+  "reservation": "reservation",
+  "menu": "menu"
 }

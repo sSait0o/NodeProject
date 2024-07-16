@@ -1,21 +1,6 @@
 {
-  "welcome": "Welcome to React",
-  "button_translate": "ENG",
-  "home": "home",
-  "about": "about",
-  "review": "review",
-  "map": "map",
-  "contact": "contact",
-  "about_title": "Welcome to GRILL'INN",
-  "about_description": "GRILL'INN is a Japanese buffet restaurant providing a delightful culinary journey. Our chefs are committed to serving you the most exquisite Japanese dishes made with the freshest ingredients. Join us for an unforgettable dining experience.",
-  "legal_title": "Legal",
-  "legal_description": "This is the legal section.",
-  "rgpd_title": "GDPR",
-  "rgpd_description": "This is the GDPR section.",
-  "legal_terms": "Legal Terms",
-  "made_by": "Made by ARCSOLU",
-  "contact_tel": "Contact",
-  "contact_address": "Address",
-  "contact_opening": "Opening Hours",
-  "contact_reservation": "Reservation"
+  "takeaway": "takeaway",
+  "delivery": "delivery",
+  "reservation": "reservation",
+  "menu": "menu"
 }
