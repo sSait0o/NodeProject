@@ -7,7 +7,7 @@ import {
   IconBooking,
   IconMenu,
 } from "../../components/IconSvg";
-import LanguageSwitcher from "../../components/LanguageSwitcher/languageSwitcher"
+import LanguageSwitcher from "../../components/LanguageSwitcher/languageSwitcher";
 import ModalMenu from "../../components/ModalMenu/ModalMenu";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,7 @@ const Menu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -51,19 +51,19 @@ const Menu = () => {
         <ul className={isMobile ? "nav__items_bottom" : "nav__items"}>
           <li>
             <Button
-              text={t('takeaway')} 
+              text={t("takeaway")}
               icon={<IconTake />}
               className="nav__emporter"
             />
           </li>
           <li>
-            <Button text={t('delivery')} icon={<IconDelivery />} />
+            <Button text={t("delivery")} icon={<IconDelivery />} />
           </li>
           <li>
-            <Button text={t('reservation')} icon={<IconBooking />} />
+            <Button text={t("reservation")} icon={<IconBooking />} />
           </li>
           <li>
-            <Button text={t('menu')} icon={<IconMenu />} />
+            <Button text={t("menu")} icon={<IconMenu />} />
           </li>
         </ul>
       </div>

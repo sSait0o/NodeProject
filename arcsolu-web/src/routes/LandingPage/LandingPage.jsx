@@ -7,9 +7,13 @@ import "./LandingPage.scss";
 
 const LandingPage = () => {
   return (
-    <div>
-      <Menu />
-      <HomeSection />
+    <div className="main__container">
+      <div className="menu">
+        <Menu />
+      </div>
+      <div className="home-section">
+        <HomeSection />
+      </div>
     </div>
   );
 };

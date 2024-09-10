@@ -1,0 +1,16 @@
+.main__container {
+  display: flex;
+  height: 100vh;
+  .menu {
+    width: 200px;
+    background-color: #f0f0f0;
+  }
+  .home-section {
+    flex-grow: 1;
+  }
+  @media (max-width: 600px) {
+    .menu {
+      width: 0px;
+    }
+  }
+}
