@@ -22,9 +22,24 @@ export default function AddBook() {
     <div>
       <h1>Ajouter un Livre</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Titre" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input type="text" placeholder="Auteur" value={author} onChange={(e) => setAuthor(e.target.value)} />
-        <input type="number" placeholder="Année" value={year} onChange={(e) => setYear(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Titre"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Auteur"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Année"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+        />
         <button type="submit">Ajouter</button>
       </form>
     </div>

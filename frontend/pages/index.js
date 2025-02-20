@@ -30,11 +30,17 @@ export default function Home() {
   return (
     <div>
       <h1>Liste des Livres</h1>
-      <a href="/add" style={{ display: "block", marginBottom: "20px" }}>Ajouter un Livre</a>
-      <button onClick={() => {
-        localStorage.removeItem("token"); // Supprime le token
-        window.location.reload(); // Recharge la page pour forcer la déconnexion
-      }}>Se Déconnecter</button>
+      <a href="/add" style={{ display: "block", marginBottom: "20px" }}>
+        Ajouter un Livre
+      </a>
+      <button
+        onClick={() => {
+          localStorage.removeItem("token"); // Supprime le token
+          window.location.reload(); // Recharge la page pour forcer la déconnexion
+        }}
+      >
+        Se Déconnecter
+      </button>
       <ul>
         {books.length === 0 ? (
           <p>Aucun livre disponible.</p>
@@ -44,13 +50,15 @@ export default function Home() {
               <a href={`/book/${book.id}`} style={{ marginRight: "10px" }}>
                 {book.title} - {book.author} ({book.year})
               </a>
-              <button onClick={async () => {
-                await fetch(`http://localhost:3001/books/${book.id}`, {
-                  method: "DELETE",
-                  headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
-                });
-                setBooks(books.filter((b) => b.id !== book.id));
-              }}>
+              <button
+                onClick={async () => {
+                  await fetch(`http://localhost:3001/books/${book.id}`, {
+                    method: "DELETE",
+                    headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
+                  });
+                  setBooks(books.filter((b) => b.id !== book.id));
+                }}
+              >
                 Supprimer
               </button>
             </li>
