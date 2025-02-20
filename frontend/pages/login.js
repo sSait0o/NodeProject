@@ -29,8 +29,18 @@ export default function Login() {
       <a href="/register">Créer un compte</a>
       <br />
       <br />
-      <input type="text" placeholder="Nom" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Nom"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button type="submit">Se connecter</button>
     </form>
   );
