@@ -20,8 +20,18 @@ export default function Register() {
   return (
     <form onSubmit={handleRegister}>
       <h1>Créer un compte</h1>
-      <input type="text" placeholder="Nom" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Nom"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button type="submit">S'inscrire</button>
     </form>
   );
