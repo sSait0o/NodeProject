@@ -1,6 +1,5 @@
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
-
 require("dotenv").config();
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -11,18 +10,18 @@ const pool = new Pool({
 });
 
 class User {
-  static async createUser({ username, password }) {
+  static async createUser({ email, password, full_name, birth_date }) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
-      [username, hashedPassword]
+      `INSERT INTO users (email, password, full_name, birth_date) VALUES ($1, $2, $3, $4) RETURNING *`,
+      [email, hashedPassword, full_name, birth_date]
     );
     return result.rows[0];
   }
 
-  static async getUserByUsername(username) {
-    const result = await pool.query("SELECT * FROM users WHERE username = $1", [
-      username,
+  static async getUserByEmail(email) {
+    const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [
+      email,
     ]);
     return result.rows[0];
   }

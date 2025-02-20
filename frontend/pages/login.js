@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
@@ -13,7 +13,7 @@ export default function Login() {
     const response = await fetch("http://localhost:3001/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
@@ -30,10 +30,10 @@ export default function Login() {
       <br />
       <br />
       <input
-        type="text"
-        placeholder="Nom"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        type="email"
+        placeholder="Adresse email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"

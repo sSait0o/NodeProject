@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express(); // <-- Instanciation d'Express déplacée ici
+const app = express(); // Instanciation d'Express déplacée ici
 const Book = require("./models/book");
 const User = require("./models/user");
 require("dotenv").config();
@@ -25,7 +25,7 @@ const authenticate = (req, res, next) => {
   }
 };
 
-// Endpoints
+// Endpoints pour les livres
 app.get("/books", authenticate, async (req, res) => {
   try {
     const books = await Book.getAllBooks();
@@ -41,9 +41,7 @@ app.get("/books/:id", authenticate, async (req, res) => {
     const book = await Book.getBookById(req.params.id);
     book
       ? res.status(200).json(book)
-      : res.status(404).json({
-          message: "Pas trouvé",
-        });
+      : res.status(404).json({ message: "Pas trouvé" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -69,7 +67,7 @@ app.put("/books/:id", authenticate, async (req, res) => {
   }
 });
 
-// DELETE
+// DELETE BOOK
 app.delete("/books/:id", authenticate, async (req, res) => {
   try {
     await Book.deleteBook(req.params.id);
@@ -82,10 +80,20 @@ app.delete("/books/:id", authenticate, async (req, res) => {
 // ROUTE : Inscription
 app.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.createUser({ username, password });
+    const { email, password, full_name, birth_date } = req.body;
+    const existingUser = await User.getUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: "Email déjà utilisé" });
+    }
+    const user = await User.createUser({
+      email,
+      password,
+      full_name,
+      birth_date,
+    });
     res.status(201).json({ message: "Utilisateur créé", user });
   } catch (error) {
+    console.error("Erreur lors de l'inscription :", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -93,20 +101,15 @@ app.post("/register", async (req, res) => {
 // ROUTE : Connexion
 app.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.getUserByUsername(username);
-
+    const { email, password } = req.body;
+    const user = await User.getUserByEmail(email);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: "Identifiants invalides" });
     }
 
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      SECRET_KEY,
-      {
-        expiresIn: "2h",
-      }
-    );
+    const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, {
+      expiresIn: "2h",
+    });
 
     res.json({ token });
   } catch (error) {
