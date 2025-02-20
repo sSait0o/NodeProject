@@ -21,7 +21,6 @@ INSERT INTO users (username, password) VALUES
 ('admin', '$2b$10$M.kMPH9UXH67itfHTUcrIOJgyRxXaH2RtciXMKmK6m.TfQX/S68d2'),
 -- admin, password123
 
--- 5. Insertion de données de test dans `books`
 INSERT INTO books (title, author, year) VALUES
 ('Le Petit Prince', 'Antoine de Saint-Exupéry', 1943),
 ('1984', 'George Orwell', 1949),
