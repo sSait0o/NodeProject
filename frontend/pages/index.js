@@ -1,6 +1,8 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
+import Header from "./header";
+import "/src/app/globals.css";
 
 export default function Home() {
   const { token } = useContext(AuthContext);
@@ -17,8 +19,9 @@ export default function Home() {
 
   return (
     <div>
+      <Header />
       <h1>Accueil</h1>
-      <p>Bienvenue sur votre page d'accueil.</p>
+      <p class="bg-gray-50">Bienvenue sur votre page d'accueil.</p>
       <button
         onClick={() => {
           localStorage.removeItem("token"); // Supprime le token
