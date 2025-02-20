@@ -9,7 +9,7 @@ export default function AddBook() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/books", {
+    const response = await fetch("http://localhost:3001/books", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, author, year: parseInt(year) }),

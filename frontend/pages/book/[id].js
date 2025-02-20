@@ -8,7 +8,7 @@ export default function BookDetail() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3000/books/${id}`)
+      fetch(`http://localhost:3001/books/${id}`)
         .then((res) => res.json())
         .then((data) => setBook(data))
         .catch((err) => console.error("Erreur :", err));
