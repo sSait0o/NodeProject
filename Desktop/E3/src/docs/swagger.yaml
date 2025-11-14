@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  title: MediTrack Secure API
+  version: "1.0.0"
+  description: >
+    API sécurisée pour la gestion des dépôts, produits, mouvements et zones.
+    Cette version inclut JWT, rôles (user/admin), validation et sécurisation E4.
+
+servers:
+  - url: http://127.0.0.1:5050
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Produit:
+      type: object
+      properties:
+        id: { type: string }
+        nom: { type: string }
+        code: { type: string }
+        quantite: { type: integer }
+        depot_id: { type: string }
+
+    Mouvement:
+      type: object
+      properties:
+        id: { type: string }
+        type: { type: string }
+        quantite: { type: integer }
+        produit_id: { type: string }
+        date: { type: string }
+
+    Zone:
+      type: object
+      properties:
+        _id: { type: string }
+        depot_id: { type: string }
+        zones:
+          type: array
+          items:
+            type: object
+            properties:
+              nom: { type: string }
+              bacs:
+                type: array
+                items:
+                  type: string
+
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        username: { type: string }
+        role: { type: string }
+
+paths:
+
+  /auth/register:
+    post:
+      summary: Créer un utilisateur
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string }
+                password: { type: string }
+                role:
+                  type: string
+                  enum: [user, admin]
+      responses:
+        201:
+          description: Utilisateur créé
+        400:
+          description: Erreur validation
+
+  /auth/login:
+    post:
+      summary: Connexion utilisateur
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string }
+                password: { type: string }
+      responses:
+        200:
+          description: Authentifié
+        401:
+          description: Mauvais identifiants
+
+  /produits:
+    get:
+      summary: Liste des produits
+      tags: [Produits]
+      responses:
+        200:
+          description: Liste OK
+
+    post:
+      summary: Ajouter un produit
+      tags: [Produits]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produit'
+      responses:
+        201:
+          description: Produit créé
+        401:
+          description: Non authentifié
+
+  /produits/{id}:
+    delete:
+      summary: Supprimer un produit (admin uniquement)
+      tags: [Produits]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        200:
+          description: Produit supprimé
+        403:
+          description: Accès refusé
+        401:
+          description: Non authentifié
+
+  /mouvements:
+    get:
+      summary: Liste des mouvements
+      tags: [Mouvements]
+      responses:
+        200:
+          description: OK
+
+    post:
+      summary: Enregistrer un mouvement
+      tags: [Mouvements]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mouvement'
+      responses:
+        201:
+          description: Mouvement enregistré
+        401:
+          description: Non authentifié
+
+  /depots/{id}/zones:
+    get:
+      tags: [Zones]
+      summary: Récupérer la structure interne d’un dépôt
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema: { type: string }
+      responses:
+        200:
+          description: OK
+
+    post:
+      tags: [Zones]
+      summary: Créer la structure interne d’un dépôt
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+      responses:
+        201:
+          description: Zone créée
+
+    put:
+      tags: [Zones]
+      summary: Modifier la structure interne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema: { type: string }
+      responses:
+        200:
+          description: Zone mise à jour

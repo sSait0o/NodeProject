@@ -1,10 +1,13 @@
 const { connectPG } = require("./src/db_pg");
 const { connectMongo } = require("./src/db_mongo");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 
 const produitsRoutes = require("./src/routes/produitsRoutes");
 const mouvementsRoutes = require("./src/routes/mouvementsRoutes");
 const zonesRoutes = require("./src/routes/zonesRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const swaggerDocument = YAML.load("./src/docs/swagger.yaml");
 
 require("dotenv").config();
 const express = require("express");
@@ -34,6 +37,7 @@ app.use("/produits", produitsRoutes);
 app.use("/mouvements", mouvementsRoutes);
 app.use("/depots/:id/zones", zonesRoutes);
 app.use("/auth", authRoutes);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Gestion des erreurs JSON invalides
 app.use((err, req, res, next) => {
