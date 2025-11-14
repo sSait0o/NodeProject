@@ -1,0 +1,28 @@
+1. Encapsulation dans la gestion des produits :
+   Je regrouperais la logique métier des produits dans un module dédié,
+   en masquant les propriétés internes (SQL, contraintes, validation)
+   derrière des méthodes publiques comme create(), update(), delete().
+
+2. Pourquoi PostgreSQL pour les mouvements et MongoDB pour la cartographie :
+   PostgreSQL garantit intégrité (FK), transactions (IN/OUT), cohérence stricte.
+   MongoDB est parfait pour stocker des structures arborescentes variables,
+   comme des zones ou bacs, non adaptées à un schéma SQL rigide.
+
+3. Éviter les attaques CSRF :
+   L’API est REST stateless → utilisation d’un header Authorization: Bearer JWT.
+   CSRF n’est pas possible si aucune session cookie n’est utilisée.
+   (Sinon : SameSite cookies, CSRF token, validation origine).
+
+4. Swagger pour POST /mouvements :
+   - Description : mouvement de stock
+   - Body : produit_id (UUID), type ("IN"/"OUT"), quantite (int > 0)
+   - Réponses :
+       201 : mouvement créé + nouveau stock
+       400 : erreur métier (ex : OUT > stock)
+       404 : produit introuvable
+
+5. Scénario de test d’intégration POST /mouvements :
+   - Créer un produit avec quantite = 10
+   - Envoyer POST IN +5 → stock doit être 15
+   - Envoyer POST OUT +3 → stock doit être 12
+   - Envoyer POST OUT +999 → doit retourner 400 et ne pas modifier le stock
