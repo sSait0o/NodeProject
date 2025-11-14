@@ -45,6 +45,16 @@ async function migrate(p) {
       date TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
+
+  // Table users
+  await p.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      username TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('user','admin'))
+    );
+  `);
 }
 
 async function connectPG() {
