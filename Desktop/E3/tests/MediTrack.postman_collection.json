@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "efd71078-1024-451a-afa9-efa9894b4d82",
+		"name": "MediTrack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41846238"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5050/mouvements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNmODNlNDVlLTMwNDItNDZjYy05NmRlLTFkYzA5ZTAyYmM3NiIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjMxMzE5ODUsImV4cCI6MTc2MzEzNTU4NX0.XWDJMbU68rErD7YRR85x7lDM3UYfufwHHrZWGz5aC3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"produit_id\": \"08b58fd1-bc0c-4e7c-b09b-9d8f037790bc\",\n  \"type\": \"IN\",\n  \"quantite\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5050/mouvements",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5050",
+					"path": [
+						"mouvements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5050/produits",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNmODNlNDVlLTMwNDItNDZjYy05NmRlLTFkYzA5ZTAyYmM3NiIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjMxMzE5ODUsImV4cCI6MTc2MzEzNTU4NX0.XWDJMbU68rErD7YRR85x7lDM3UYfufwHHrZWGz5aC3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nom\": \"Seringue 5ml\",\n  \"code\": \"SRG5\",\n  \"quantite\": 100,\n  \"depot_id\": \"dada4382-2b81-4f6a-b3b7-792f2fbcafc6\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5050/produits",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5050",
+					"path": [
+						"produits"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
