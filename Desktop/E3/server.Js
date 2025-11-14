@@ -1,5 +1,7 @@
 const { connectPG } = require("./src/db_pg");
 const produitsRoutes = require("./src/routes/produitsRoutes");
+const mouvementsRoutes = require("./src/routes/mouvementsRoutes");
+
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -18,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/produits", produitsRoutes);
+app.use("/mouvements", mouvementsRoutes);
 
 const PORT = process.env.PORT || 5050;
 (async () => {
