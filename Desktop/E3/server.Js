@@ -1,3 +1,4 @@
+const { connectPG } = require("./src/db_pg");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -16,6 +17,10 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5050;
-app.listen(PORT, () => {
-  console.log(`Server running on http://127.0.0.1:${PORT}`);
-});
+(async () => {
+  await connectPG();
+  const PORT = process.env.PORT || 5050;
+  app.listen(PORT, () =>
+    console.log(`Server running on http://127.0.0.1:${PORT}`)
+  );
+})();
