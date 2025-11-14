@@ -145,6 +145,7 @@ meditrack-core/
 │── server.js
 │── package.json
 │── .env.example
+│── .gitignore
 │── src/
 │   ├── db_pg.js              # PostgreSQL + migrations
 │   ├── db_mongo.js           # Connexion MongoDB

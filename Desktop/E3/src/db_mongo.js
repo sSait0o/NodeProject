@@ -4,7 +4,7 @@ async function connectMongo() {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
     console.warn(
-      "ℹ️ MONGODB_URI non défini : la partie zones (Mongo) ne sera pas disponible."
+      "MONGODB_URI non défini : la partie zones (Mongo) ne sera pas disponible."
     );
     return null;
   }
