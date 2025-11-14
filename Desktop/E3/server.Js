@@ -4,6 +4,7 @@ const { connectMongo } = require("./src/db_mongo");
 const produitsRoutes = require("./src/routes/produitsRoutes");
 const mouvementsRoutes = require("./src/routes/mouvementsRoutes");
 const zonesRoutes = require("./src/routes/zonesRoutes");
+const authRoutes = require("./src/routes/authRoutes");
 
 require("dotenv").config();
 const express = require("express");
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/produits", produitsRoutes);
 app.use("/mouvements", mouvementsRoutes);
 app.use("/depots/:id/zones", zonesRoutes);
+app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 5050;
 (async () => {

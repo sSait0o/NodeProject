@@ -18,6 +18,7 @@ function getPool() {
 async function migrate(p) {
   await p.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`).catch(() => {});
 
+  // Table dépôts
   await p.query(`
     CREATE TABLE IF NOT EXISTS depots (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -25,7 +26,7 @@ async function migrate(p) {
       adresse TEXT NOT NULL
     );
   `);
-
+  // Table produits
   await p.query(`
     CREATE TABLE IF NOT EXISTS produits (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -35,7 +36,7 @@ async function migrate(p) {
       depot_id UUID NOT NULL REFERENCES depots(id) ON DELETE CASCADE
     );
   `);
-
+  // Table mouvements
   await p.query(`
     CREATE TABLE IF NOT EXISTS mouvements (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
