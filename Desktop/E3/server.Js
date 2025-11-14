@@ -9,8 +9,15 @@ const authRoutes = require("./src/routes/authRoutes");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Front autorisé
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +34,23 @@ app.use("/produits", produitsRoutes);
 app.use("/mouvements", mouvementsRoutes);
 app.use("/depots/:id/zones", zonesRoutes);
 app.use("/auth", authRoutes);
+
+// Gestion des erreurs JSON invalides
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({ status: "error", message: "JSON invalide" });
+  }
+  next(err);
+});
+
+// Gestion des erreurs serveur
+app.use((err, req, res, next) => {
+  console.error("SERVER ERROR:", err);
+  res.status(500).json({
+    status: "error",
+    message: err.message || "Erreur interne",
+  });
+});
 
 const PORT = process.env.PORT || 5050;
 (async () => {
