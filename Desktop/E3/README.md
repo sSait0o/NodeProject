@@ -159,6 +159,10 @@ meditrack-core/
 │         ├── produitsRoutes.js
 │         ├── mouvementsRoutes.js
 │         └── zonesRoutes.js
+└── exports/
+    ├── db_export_postgres.sql
+    └── mongo_dump/ (contenu de mongodump)
+
 ```
 
 ---
