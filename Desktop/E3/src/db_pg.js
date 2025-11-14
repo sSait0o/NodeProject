@@ -51,7 +51,7 @@ async function connectPG() {
   const p = getPool();
   await p.connect();
   await migrate(p);
-  console.log("✅ PostgreSQL connecté + migrations OK");
+  console.log("PostgreSQL connecté + migrations OK");
   return p;
 }
 

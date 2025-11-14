@@ -1,6 +1,9 @@
 const { connectPG } = require("./src/db_pg");
+const { connectMongo } = require("./src/db_mongo");
+
 const produitsRoutes = require("./src/routes/produitsRoutes");
 const mouvementsRoutes = require("./src/routes/mouvementsRoutes");
+const zonesRoutes = require("./src/routes/zonesRoutes");
 
 require("dotenv").config();
 const express = require("express");
@@ -21,10 +24,13 @@ app.get("/", (req, res) => {
 
 app.use("/produits", produitsRoutes);
 app.use("/mouvements", mouvementsRoutes);
+app.use("/depots/:id/zones", zonesRoutes);
 
 const PORT = process.env.PORT || 5050;
 (async () => {
-  await connectPG();
+  await connectPG(); // PostgreSQL : dépôts/produits/mouvements
+  await connectMongo(); // MongoDB : zones
+
   const PORT = process.env.PORT || 5050;
   app.listen(PORT, () =>
     console.log(`Server running on http://127.0.0.1:${PORT}`)
