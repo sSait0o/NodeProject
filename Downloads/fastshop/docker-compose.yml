@@ -1,0 +1,13 @@
+services:
+  product-service:
+    build: ./services/product-service
+    ports: ["3001:3001"]
+  order-service:
+    build: ./services/order-service
+    ports: ["3002:3002"]
+  api-gateway:
+    build: ./services/api-gateway
+    ports: ["3000:3000"]
+  frontend:
+    build: ./frontend
+    ports: ["8080:8080"]
